@@ -1,5 +1,5 @@
 describe("Address Book", function() {
-  var addressBook,
+  let addressBook,
       thisContact;
 
   beforeEach(function () {
@@ -18,7 +18,19 @@ describe("Address Book", function() {
     addressBook.deleteContact(0);
 
     expect(addressBook.getContact(0)).not.toBeDefined();
-  })
+  });
 });
 
-console.log('111');
+describe('Async Address Book',function () {
+  let addressBook = new AddressBook();
+
+  beforeEach(function (done) {
+    addressBook.getInitialContacts(function () {
+      done();
+    });
+  });
+  it('should grab inital contacts',function (done) {
+    expect(addressBook.initialComplete).toBe(true);
+    done();
+  });
+});
